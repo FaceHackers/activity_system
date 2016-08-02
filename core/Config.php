@@ -7,13 +7,13 @@ class Config {
     public $cssRoot;
     public $jsRoot;
     
-    public $db;
+    //public $db;
     
     //public $whiteList;
     
     function __construct(){
          /* 專案名稱 - <title> */
-        $this->projectName = '選課系統';
+        $this->projectName = '報名活動系統';
         
         /* 專案目錄結構設定 */
         $this->root = '/elective_system-PDO/';
@@ -25,18 +25,14 @@ class Config {
         /* 資料庫連線設定 */
         $this->db['host']       = 'localhost';
         $this->db['port']       = '3306';
-        $this->db['username']   = 'root';
-        $this->db['password']   = '1221';
-        $this->db['dbname']     = 'elective_system';
+        $this->db['username']   = 'Hackers';
+        $this->db['password']   = '06071221';
+        $this->db['dbname']     = 'activity_system';
         
         
         /* 不需要經過 是否登入狀態 的 action */
-        $this->whiteList = array(  "curd/index",
-                                    // "player/isAccountExsist", 
-                                    // "player/isNicknameExsist",
-                                    // "player/forgetPassword",
-                                    // "player/login",
-                                    // "player/registe" 
-                                );
+        // $this->whiteList = array(  "curd/index",
+                                  
+        //                         );
     }
 }

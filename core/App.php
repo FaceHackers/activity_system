@@ -8,7 +8,7 @@ class App{
         $controllerName =  "{$url[0]}Controller";
        
         if (!file_exists("controllers/$controllerName.php"))
-            $controllerName = 'curdController';
+            $controllerName = 'adminController';
         require_once "controllers/$controllerName.php";
         $controller = new $controllerName;
         $methodName = isset($url[1]) ? $url[1] : "index";
