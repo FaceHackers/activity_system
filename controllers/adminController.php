@@ -15,10 +15,15 @@ class adminController extends Controller {
         $admin->employee_id     = isset( $_POST["employee_id"] ) ? $_POST["employee_id"] : "" ;
         $admin->employee_name   = isset( $_POST["employee_name"] ) ? $_POST["employee_name"] : "" ;
         $admin->department      = isset( $_POST["department"] ) ? $_POST["department"] : "" ;
+        $admin->activity_id     = isset( $_GET["show_id"] ) ? $_GET["show_id"] : "" ;
     }
     //顯示活動頁面
     function index() {
         $this->view("addactivity");
+    }
+    //顯示活動參加頁面
+    function viewactivity() {
+        $this->view("viewactivity");
     }
     //新增活動
     function addactivity() {
@@ -62,5 +67,12 @@ class adminController extends Controller {
         $crud =  $this->model("admincurd");
         $data = $crud->reademployee();
         $this->view("employee", $data);
+    }
+    //讀取活動ID
+    function readmodify() {
+        $admin =  $this->model("admincurd");
+        $this->setDefaultValue($admin);
+        $data = $admin->readid();
+        $this->view("viewactivity", $data);
     }
 }

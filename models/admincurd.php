@@ -72,4 +72,15 @@
             $PDO->closeConnection();
             return $data;
         }
+        //讀取活動ID
+        public function readid() {
+            $PDO = new myPDO();
+            $conn = $PDO->getConnection();
+            $stmt = $conn->prepare("SELECT * FROM `activity` WHERE `activity_id` = ? LIMIT 1");
+            $stmt->bindValue(1, $this->activity_id, PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetch();
+            $PDO->closeConnection();
+            return $data;
+        }
     }

@@ -16,7 +16,7 @@ class Config {
         $this->projectName = '報名活動系統';
         
         /* 專案目錄結構設定 */
-        $this->root = '/elective_system-PDO/';
+        $this->root = '/activity_system/';
         $this->imgRoot  = $this->root . 'views/images/';
         $this->cssRoot  = $this->root . 'views/css/';
         $this->scssRoot = $this->root . 'views/scss/';
