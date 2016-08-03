@@ -40,7 +40,7 @@
     <div class="col-2">
         <label>
              活動名稱
-             <input type="text" placeholder=" 例PHP社團聚餐" id="name" name="name"  tabindex="1" autocomplete="off">
+             <input type="text" placeholder=" 例PHP社團聚餐" id="name" name="name"  tabindex="1" autocomplete="off"  required>
         </label>
      </div>
     <div class="col-2">
@@ -61,26 +61,28 @@
     <div class="col-3">
         <label>
              開始日期
-             <input type="date" name="startDate"/>
+             <input type="date" name="startDate"  required/>
         </label>
     </div>
      <div class="col-3">
         <label>
              結束日期
-             <input type="date" name="endDate"/>
+             <input type="date" name="endDate"  required/>
         </label>
     </div>
     <div class="col-4">
         <label>
-             可參加員工級別
+             可參加員工
              <select name="lab" id="sex" tabindex="5">
+                 <option value="主管">全公司</option>
+                 <option value="主管">經理</option>
                  <option value="主管">主管</option>
-                 <option ="一般員工">一般員工</option>
+                 <option value="一般員工">一般員工</option>
              </select>
         </label>
     </div>
     <div class="col-submit">
-        <button class="submitbtn" name="insert">確定新增</button>
+        <button class="submitbtn" name="insert">新增活動</button>
     </div>
   
   </form>

@@ -2,7 +2,7 @@
 <html>
     <head>
         <?PHP require_once('header.php'); ?>
-        <script language="javascript" type="text/javascript">
+    <script language="javascript" type="text/javascript">
         function my_key_down(e){
             var key;
             //console.warn(e.keyCode);
@@ -26,73 +26,52 @@
         }
         //console.log(String.fromCharCode(229));
         //console.log(String.fromCharCode(0));
-</script>
+    </script>
     </head>
-    <body onbeforeunload="checkLeave()">
+    <body>
     <?php
         require_once 'meun.php';
     ?>
-     <div id="wrapper">
-  
-  <h1>新增員工資料</h1>
-  
-  <form method="post" name="form" action="addstu">
-  <div class="col-2">
-    <label>
-     學號
-      <input type="number" type="number" min="1" max="9999999999" placeholder=" 例1004060XX" id="course_id" name="student_id"  tabindex="1" maxlength="20" autofocus = "autofocus" autocomplete="off" required>
-    </label>
-  </div>
-  <div class="col-2">
-    <label>
-     學生姓名
-      <input placeholder="student_name" id="course_name" name="student_name" tabindex="2" maxlength="20" autofocus = "autofocus" autocomplete="off" required>
-    </label>
-  </div>
-  
-  <div class="col-3">
-    <label>
-     科系
-      <input placeholder="Dept" id="teacher_name" name="Dept" tabindex="3" maxlength="20" autofocus = "autofocus" autocomplete="off" required>
-    </label>
-  </div>
-  <div class="col-3">
-    <label>
-      性別
-      <select name="sex" id="sex" tabindex="5">
-        <option value="男">男</option>
-        <option ="女">女</option>
-        
-      </select>
-    </label>
-  </div>
-  
-  
-  <div class="col-4">
-    <label>
-     班級
-      <input  placeholder="class" id="Credit" name="class" tabindex="6" autofocus = "autofocus" autocomplete="off" maxlength="20" required >
-    </label>
-  </div>
-  <div class="col-4">
-    <label>
-     密碼
-      <input type="password"  placeholder="password" id="Credit" name="Credit" tabindex="6" autofocus = "autofocus" autocomplete="off" maxlength="20" required >
-    </label>
-  </div>
-<div class="col-submit">
-    <button class="submitbtn" name="insertstu">確定新增</button>
-  </div>
-  
+      <div id="wrapper">
+      <h1>新增員工資料</h1>
+      <form method="post" name="form" action="addemployee">
+      <div class="col-2">
+        <label>
+          員工編號
+          <input type="number" placeholder=" 例2016070401" id="employee_id" name="employee_id"  tabindex="1"  autocomplete="off" required>
+        </label>
+      </div>
+      <div class="col-2">
+        <label>
+          員工名稱
+          <input placeholder="employee_name" id="employee_name" name="employee_name" tabindex="2"  autocomplete="off" required>
+        </label>
+      </div>
+       <div class="col-2">
+        <label>
+          員工部門
+          <input placeholder="department" id="department" name="department" tabindex="2"  autocomplete="off" required>
+        </label>
+      </div>
+      <div class="col-3">
+          <label>
+          員工級別
+          <select name="lab" id="lab" tabindex="5">
+            <option value="主管">主管</option>
+            <option ="一般員工">一般員工</option>
+          </select>
+          </label>
+      </div>
+      <div class="col-submit">
+        <button class="submitbtn" name="insertstu">新增員工</button>
+      </div>
   </form>
   </div>    
    <script type="text/javascript">
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-
     elems.forEach(function(html) {
     var switchery = new Switchery(html);
     });
     </script> 
-    	
 </body>
 </html>
