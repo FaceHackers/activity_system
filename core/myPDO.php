@@ -26,8 +26,6 @@ class myPDO{
      function getConnection(){
           return self::$connection;
      }
-     
-     
      function closeConnection(){
           self::$connection = NULL;
      }

@@ -6,8 +6,8 @@
         
         <!-- Our CSS stylesheet file -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
-        <link rel="stylesheet" href="assets/css/styles.css" />
-        <link rel="stylesheet" href="assets/countdown/jquery.countdown.css" />
+        <link rel="stylesheet" href="<?= $config->assetscssRoot ?>styles.css" />
+        <link rel="stylesheet" href="<?= $config->countRoot ?>jquery.countdown.css" />
         
         <!--[if lt IE 9]>
           <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,8 +27,8 @@
         
         <!-- JavaScript includes -->
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-		<script src="assets/countdown/jquery.countdown.js"></script>
-		<script src="assets/js/script.js"></script>
+		<script src="<?= $config->assetsjsRoot ?>jquery.countdown.js"></script>
+		<script src="<?= $config->countRoot ?>script.js"></script>
 
     </body>
 </html>

@@ -27,7 +27,7 @@ class adminController extends Controller {
     }
     //新增活動
     function addactivity() {
-        $admin =  $this->model("admincurd");
+        $admin =  $this->model("activity");
         $this->setDefaultValue($admin);
         $data = $admin->addactivity();
         if($data){
@@ -42,7 +42,7 @@ class adminController extends Controller {
     }
     //新增員工
     function addemployee() {
-        $admin =  $this->model("admincurd");
+        $admin =  $this->model("employee");
         $this->setDefaultValue($admin);
         $num = $admin->checkid();
         if(isset($_POST['employee_id'])) {
@@ -58,19 +58,19 @@ class adminController extends Controller {
     }
     //讀取活動清單
     function readactivity() {
-        $crud =  $this->model("admincurd");
+        $crud =  $this->model("activity");
         $data = $crud->readactivity();
         $this->view("activity", $data);
     }
      //讀取員工清單
     function reademployee() {
-        $crud =  $this->model("admincurd");
+        $crud =  $this->model("employee");
         $data = $crud->reademployee();
         $this->view("employee", $data);
     }
     //讀取活動ID
     function readmodify() {
-        $admin =  $this->model("admincurd");
+        $admin =  $this->model("activity");
         $this->setDefaultValue($admin);
         $data = $admin->readid();
         $this->view("viewactivity", $data);

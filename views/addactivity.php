@@ -2,6 +2,7 @@
 <html>
     <head>
     <?PHP require_once('header.php'); ?>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script language="javascript" type="text/javascript">
         function my_key_down(e){
             var key;
@@ -27,6 +28,20 @@
         //console.log(String.fromCharCode(229));
         //console.log(String.fromCharCode(0));
     </script>
+    <script>
+      //set the default value
+      var txtId = 1;
+      
+      //add input block in showBlock
+      $("#btn").click(function () {
+          $("#showBlock").append('<div id="div' + txtId + '">Input:<input type="text" name="test[]" /> <input type="button" value="del" onclick="deltxt('+txtId+')"></div>');
+          txtId++;
+      });
+      //remove div
+      function deltxt(id) {
+          $("#div"+id).remove();
+      }
+</script> 
     </head>
     <body>
     <?php
@@ -81,11 +96,18 @@
              </select>
         </label>
     </div>
+    
     <div class="col-submit">
         <button class="submitbtn" name="insert">新增活動</button>
     </div>
-  
+  <div class="col-4">
+    
+    </div>
   </form>
+  <!-- add new item Dynamically in the show block -->
+    <div id="showBlock"></div>
+    <!-- click the button to add new item -->
+    <input type="button" class="submitbtn" id="btn" value="addItem" />
   </div>    
   <script type="text/javascript">
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));

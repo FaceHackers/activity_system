@@ -5,7 +5,6 @@ class Controller {
         require_once "models/$model.php";
         return new $model ();
     }
-    
     public function view($view, $data = Array()) {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
