@@ -28,20 +28,6 @@
         //console.log(String.fromCharCode(229));
         //console.log(String.fromCharCode(0));
     </script>
-    <script>
-      //set the default value
-      var txtId = 1;
-      
-      //add input block in showBlock
-      $("#btn").click(function () {
-          $("#showBlock").append('<div id="div' + txtId + '">Input:<input type="text" name="test[]" /> <input type="button" value="del" onclick="deltxt('+txtId+')"></div>');
-          txtId++;
-      });
-      //remove div
-      function deltxt(id) {
-          $("#div"+id).remove();
-      }
-</script> 
     </head>
     <body>
     <?php
@@ -52,6 +38,12 @@
     <h1>新增活動資料</h1>
   
     <form method="post" name="form" action="addactivity">
+     <div class="col-2">
+        <label>
+             活動編號
+             <input type="number" placeholder="編號" id="max" name="activity_idd" tabindex="2" autocomplete="off" required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
+        </label>
+     </div>
     <div class="col-2">
         <label>
              活動名稱
@@ -104,10 +96,6 @@
     
     </div>
   </form>
-  <!-- add new item Dynamically in the show block -->
-    <div id="showBlock"></div>
-    <!-- click the button to add new item -->
-    <input type="button" class="submitbtn" id="btn" value="addItem" />
   </div>    
   <script type="text/javascript">
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));

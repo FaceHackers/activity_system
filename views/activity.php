@@ -30,7 +30,7 @@
                 <td class="text-left"><?=htmlspecialchars($row["disables"]);?></td>
                 <td class="text-left"><?=htmlspecialchars($row["start"]);?></td>
                 <td class="text-left"><?=htmlspecialchars($row["end"]);?></td>
-                <td class="text-left" ><a href="readmodify?show_id=<?=htmlspecialchars($row["activity_id"]);?>">報名網址</a></td>
+                <td class="text-left" ><a href="readmodify?show_id=<?=htmlspecialchars(md5($row["activity_id"]));?>">報名網址</a></td>
             </tr>
         <?php } ?>
         </tbody>

@@ -1,11 +1,10 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
+session_start(); 
+require_once "core/Tools.php";
 class adminController extends Controller {
     //接收使用者資料
     function setDefaultValue($admin){
+        $admin->activity_idd    = isset( $_POST["activity_idd"] ) ? $_POST["activity_idd"] : "" ;
         $admin->name            = isset( $_POST["name"] ) ? $_POST["name"] : "" ;
         $admin->maxx            = isset( $_POST["maxx"] ) ? $_POST["maxx"] : "" ;
         $admin->yes             = isset( $_POST['yes'] ) ? $_POST["yes"] : "" ;
@@ -16,6 +15,7 @@ class adminController extends Controller {
         $admin->employee_name   = isset( $_POST["employee_name"] ) ? $_POST["employee_name"] : "" ;
         $admin->department      = isset( $_POST["department"] ) ? $_POST["department"] : "" ;
         $admin->activity_id     = isset( $_GET["show_id"] ) ? $_GET["show_id"] : "" ;
+        $admin->activityy_id    = isset( $_POST["show_id"] ) ? $_POST["show_id"] : "" ;
     }
     //顯示活動頁面
     function index() {
@@ -29,6 +29,7 @@ class adminController extends Controller {
     function addactivity() {
         $admin =  $this->model("activity");
         $this->setDefaultValue($admin);
+        $admin->url_hash = Tools::getPasswordHash($admin->activity_idd);
         $data = $admin->addactivity();
         if($data){
             $this->readactivity();
@@ -74,5 +75,20 @@ class adminController extends Controller {
         $this->setDefaultValue($admin);
         $data = $admin->readid();
         $this->view("viewactivity", $data);
+    }
+    //報名活動
+    function insert() {
+        $admin =  $this->model("activity");
+        $this->setDefaultValue($admin);
+        $num = $admin->check_id();
+        if($num) {
+            $data= $admin->insert();
+            header("location: readmodify?show_id=$admin->activityy_id");
+    		exit;
+        }
+    	else {
+    		header("location: readmodify?show_id=$admin->activityy_id");
+    		exit;
+    	}
     }
 }

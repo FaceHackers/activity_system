@@ -50,13 +50,18 @@
        <div class="col-2">
         <label>
           員工部門
-          <input placeholder="department" id="department" name="department" tabindex="2"  autocomplete="off" required>
+           <select name="department" id="department" tabindex="5">
+            <option value="技術部門">技術部門</option>
+            <option value="人資部門">人資部門</option>
+            <option ="企劃部門">企劃部門</option>
+          </select>
         </label>
       </div>
       <div class="col-3">
           <label>
           員工級別
           <select name="lab" id="lab" tabindex="5">
+            <option value="經理">經理</option>
             <option value="主管">主管</option>
             <option ="一般員工">一般員工</option>
           </select>

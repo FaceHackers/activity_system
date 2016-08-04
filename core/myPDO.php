@@ -11,7 +11,6 @@ class myPDO{
           self::$connection = $pdo;
           $config = null;
           $pdo = null;
-          
           // try{
           //    $pdo = new PDO("mysql:host=".$config->db['host'].":".$config->db['port'].";dbname=".$config->db['dbname'], $config->db['username'],
           //    $config->db['password'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));

@@ -34,7 +34,7 @@
      <div id="wrapper">
      <h1>活動細節</h1>
   
-   <form method="post" name="form" action="">
+   <form method="post" name="form" action="insert">
     <div class="col-3">
         <label>
              活動名稱
@@ -50,7 +50,7 @@
     <div class="col-3">
         <label>
               已參加人數
-              <input type="number" placeholder="數量" id="max" name="maxx" tabindex="2" autocomplete="off" value="<?=htmlspecialchars($row['max']) ?>" readonly required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
+              <input type="number"  id="max" name="maxx" tabindex="2" autocomplete="off" value="" readonly required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
         </label>
     </div>
     <div class="col-3">
@@ -71,29 +71,39 @@
              <input type="date" name="endDate" value="<?=htmlspecialchars($row['end']) ?>" readonly required/>
         </label>
     </div>
-    <div class="col-4">
+    <div class="col-3">
         <label>
              可參加員工
-             <input type="text" name="" value="<?=htmlspecialchars($row['disables']) ?>" readonly/>
+             <input type="text" name="lab" value="<?=htmlspecialchars($row['disables']) ?>" readonly/>
         </label>
     </div>
-   
-  <div class="col-submit">
-      <input type="hidden" name="edt_id" value="<?php echo $_GET['edt_id'] ?>">
-    <!--<button class="submitbtn" type="submit" name="update">確定修改</button>-->
-  </div>
-  </form>
-  <h1>參加活動</h1>
-  <form method="post" name="form" action="">
+    <br>
+    <div class="col-1">
+        <label>
+             <h2>活動報名填寫資料</h2>
+        </label>
+    </div>
+    <br>
     <div class="col-2">
         <label>
              員工編號
-             <input type="text" placeholder="例2016070401" id="name" name="name"  tabindex="1" autocomplete="off" value=""  required>
+             <input type="text" placeholder="例2016070401" id="name" name="employee_id"  tabindex="1" autocomplete="off" value=""  required>
         </label>
     </div>
+    <div class="col-2">
+        <label>
+            <?php if($row['bring']=='是') { ?>
+             攜伴人數
+             <input type="number" placeholder="數量" id="max" name="maxx" tabindex="2" autocomplete="off" required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
+            <?php }
+                else {
+                    echo "此活動無法攜伴參加";
+                }
+            ?>
         </label>
+    </div>
   <div class="col-submit">
-      <input type="hidden" name="edt_id" value="<?php echo $_GET['edt_id'] ?>">
+      <input type="hidden" name="show_id" value="<?php echo $_GET['show_id'] ?>">
       <button class="submitbtn" type="submit" name="update">報名</button>
   </div>
   </form>
