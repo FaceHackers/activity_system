@@ -72,7 +72,7 @@
         }
         //讀取活動ID
         public function getid() {
-            $sql ="SELECT * FROM `activity` WHERE `url` = ? FOR UPDATE";
+            $sql ="SELECT * FROM `activity` WHERE `url` = ?";
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(1, $this->activityy_id, PDO::PARAM_STR);
             $stmt->execute();
@@ -120,14 +120,19 @@
          $stmt->execute();
         $result = $stmt->fetchAll();
 	    $this->pdoo->closeConnection();
-	    
 	    if($result) {
 	        $_SESSION['alert'] = "報名成功";
 	        return true;
-	    }
+	        }
         } 
         public function message(){
         $_SESSION['alert'] = "此次報名人數超過報名餘額";
-    }
+        }
+        public function error(){
+        $_SESSION['alert'] = "時間還沒開始報名";
+        }
+        public function errorr(){
+        $_SESSION['alert'] = "已結束報名";
+        }
         
 }
