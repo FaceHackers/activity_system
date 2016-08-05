@@ -50,7 +50,7 @@
     <div class="col-3">
         <label>
               剩餘人數
-              <input type="number"  id="max" name="maxx" tabindex="2" autocomplete="off" value="<?=htmlspecialchars($row['people']) ?>" readonly required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
+              <input type="number"  id="leftPeople" name="maxx" tabindex="2" autocomplete="off" value="<?=htmlspecialchars($row['people']) ?>" readonly required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
         </label>
     </div>
     <div class="col-3">
@@ -103,11 +103,26 @@
         </label>
     </div>
   <div class="col-submit">
-      <input type="hidden" name="show_id" value="<?php echo $_GET['show_id'] ?>">
+      <input id="id" type="hidden" name="show_id" value="<?php echo $_GET['show_id'] ?>">
       <button class="submitbtn" type="submit" name="update">報名</button>
   </div>
   </form>
-  </div>    
+  </div> 
+   <script type="text/javascript">
+    setInterval(function()
+    {
+    activeID = $("#id").val();
+     //alert(activeID);
+    $.ajax({
+        url: "/activity_system/admin/ajaxgetconut",
+        method: "POST",
+        data: {'show_id': activeID},
+        success: function(data){
+            //console.log(data);
+            $("#leftPeople").val( $.trim(data) );
+    }});
+    },3000)
+    </script>
    <script type="text/javascript">
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     elems.forEach(function(html) {

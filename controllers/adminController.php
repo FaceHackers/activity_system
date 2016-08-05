@@ -83,21 +83,26 @@ class adminController extends Controller {
         $this->setDefaultValue($admin);
         $admin->maxx = $admin->maxx + 1; //攜伴人數加上自己
         $getid= $admin->getid();
-        // var_dump($getid[0]["people"]);
-        // exit;
         $num = $admin->check_id();
         if($num > 0) {
-            $newcount = $getid[0]["people"] - $admin->maxx;
+            $newcount = $getid["people"] - $admin->maxx;
             if($newcount >= 0) {
             $data= $admin->updatecount($newcount);
-            //$data= $admin->insert();
+            $dataa= $admin->insert();
             header("location: readmodify?show_id=$admin->activityy_id");
     		exit;
             }
     	else {
+    	    $message = $admin->message();
     		header("location: readmodify?show_id=$admin->activityy_id");
     		exit;
     	}
         }
-    }   
+    }
+    function ajaxgetconut(){
+        $admin =  $this->model("activity");
+        $this->setDefaultValue($admin);
+        $row = $admin->getid();
+        $this->view("showajaxcount", $row['people']);
+    }
 }
