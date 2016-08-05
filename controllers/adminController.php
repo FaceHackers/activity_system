@@ -30,8 +30,9 @@ class adminController extends Controller {
         $admin =  $this->model("activity");
         $this->setDefaultValue($admin);
         $admin->url_hash = Tools::getPasswordHash($admin->activity_idd);
-        $data = $admin->addactivity();
-        if($data){
+        $num = $admin->activityid();
+        if($num==0){
+            $data = $admin->addactivity();
             $this->readactivity();
         }else{
             $this->index();
@@ -80,15 +81,23 @@ class adminController extends Controller {
     function insert() {
         $admin =  $this->model("activity");
         $this->setDefaultValue($admin);
+        $admin->maxx = $admin->maxx + 1; //攜伴人數加上自己
+        $getid= $admin->getid();
+        // var_dump($getid[0]["people"]);
+        // exit;
         $num = $admin->check_id();
-        if($num) {
-            $data= $admin->insert();
+        if($num > 0) {
+            $newcount = $getid[0]["people"] - $admin->maxx;
+            if($newcount >= 0) {
+            $data= $admin->updatecount($newcount);
+            //$data= $admin->insert();
             header("location: readmodify?show_id=$admin->activityy_id");
     		exit;
-        }
+            }
     	else {
     		header("location: readmodify?show_id=$admin->activityy_id");
     		exit;
     	}
-    }
+        }
+    }   
 }

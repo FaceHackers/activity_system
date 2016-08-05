@@ -3,10 +3,8 @@
         public $con ;
         public $pdoo ;
         public function __construct() {
-            $PDO = new myPDO();
-            $conn = $PDO->getConnection(); 
-            $this->con = $conn;
-            $this->pdoo = $PDO;
+            $this->pdoo = new myPDO();
+            $this->con = $this->pdoo ->getConnection(); 
         }
         //新增活動資料
         public function addactivity() {
@@ -25,8 +23,24 @@
             $stmt->bindValue(7, $this->endDate, PDO::PARAM_STR);
             $stmt->bindValue(8, $this->lab);
             $data = $stmt->execute();
+            var_dump($this->lab);
+            exit;
             $this->pdoo->closeConnection();
             return true;
+        }
+        //判斷活動編號不能重複
+        public function activityid() {
+            $sql ="SELECT * FROM `activity` WHERE `activity_id` = ? LIMIT 1";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(1, $this->activity_idd, PDO::PARAM_STR);
+            $stmt->execute();
+            $rows = $stmt->fetch(); 
+            $this->pdoo->closeConnection();
+            //return $rows;
+             if($rows > 0) {
+                $_SESSION['alert'] = "活動編號重複";
+                return true;
+            }
         }
         //讀取活動資料
         public function readactivity() {
@@ -57,19 +71,18 @@
             $this->pdoo->closeConnection();
             return $data;
         }
-        //報名活動
-         public function insert() {
-            $sql = "INSERT INTO `activity_detail` (`employee_id`,`activity_id`,`people`) VALUES (?, ?, ?)";
+        //讀取活動ID
+        public function getid() {
+            $sql ="SELECT * FROM `activity` WHERE `url` = ? LIMIT 1";
             $stmt = $this->con->prepare($sql);
-            $stmt->bindValue(1, $this->employee_id, PDO::PARAM_STR);
-            $stmt->bindValue(2, $this->activityy_id, PDO::PARAM_STR);
-            $stmt->bindValue(3, $this->maxx, PDO::PARAM_STR);
-            $data = $stmt->execute();
+            $stmt->bindValue(1, $this->activityy_id, PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
             $this->pdoo->closeConnection();
             return $data;
         }
         //報名活動
-         public function insertt() {
+         public function insert() {
             $sql = "INSERT INTO `activity_detail` (`employee_id`,`activity_id`,`people`) VALUES (?, ?, ?)";
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(1, $this->employee_id, PDO::PARAM_STR);
@@ -97,6 +110,22 @@
                 return false;
             }
         }
-            
+        //修改剩餘人數
+        public function updatecount($newcount){
+        $sql = "SELECT `people` FROM `activity` WHERE `url`= ? FOR UPDATE ";
+        //sleep(5);
+        $sql = "UPDATE `activity` SET `people`= ? WHERE `url`= ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(1, $newcount, PDO::PARAM_STR);
+        $stmt->bindValue(2, $this->activityy_id, PDO::PARAM_STR);
+         $stmt->execute();
+        $result = $stmt->fetchAll();
+	    $this->pdoo->closeConnection();
+	    
+	    if($result) {
+	        $_SESSION['alert'] = "報名成功";
+	        return true;
+	    }
+    }    
         
     }

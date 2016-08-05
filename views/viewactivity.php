@@ -49,8 +49,8 @@
     </div>
     <div class="col-3">
         <label>
-              已參加人數
-              <input type="number"  id="max" name="maxx" tabindex="2" autocomplete="off" value="" readonly required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
+              剩餘人數
+              <input type="number"  id="max" name="maxx" tabindex="2" autocomplete="off" value="<?=htmlspecialchars($row['people']) ?>" readonly required requiredonkeyup="this.value=this.value.replace(/[^\d]/g,'')" onkeydown="this.value=this.value.replace(/[^\d]/g,'')" onkeypress="return my_key_down(event)">
         </label>
     </div>
     <div class="col-3">

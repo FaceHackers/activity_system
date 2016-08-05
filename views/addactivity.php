@@ -80,9 +80,9 @@
     <div class="col-4">
         <label>
              可參加員工
-             <select name="lab" id="sex" tabindex="5">
-                 <option value="主管">全公司</option>
-                 <option value="主管">經理</option>
+             <select name="lab" id="lab" tabindex="5">
+                 <option value="全公司">全公司</option>
+                 <option value="經理">經理</option>
                  <option value="主管">主管</option>
                  <option value="一般員工">一般員工</option>
              </select>
@@ -92,9 +92,7 @@
     <div class="col-submit">
         <button class="submitbtn" name="insert">新增活動</button>
     </div>
-  <div class="col-4">
-    
-    </div>
+  
   </form>
   </div>    
   <script type="text/javascript">

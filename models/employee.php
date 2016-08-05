@@ -3,10 +3,8 @@
         public $con ;
         public $pdoo ;
         public function __construct() {
-            $PDO  = new myPDO();
-            $conn = $PDO->getConnection(); 
-            $this->con  = $conn;
-            $this->pdoo = $PDO;
+            $this->pdoo = new myPDO();
+            $this->con = $this->pdoo ->getConnection(); 
         }
         //判斷員工編號不能重複
         public function checkid() {
