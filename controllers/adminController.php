@@ -100,9 +100,10 @@ class adminController extends Controller {
         $admin->maxx = $admin->maxx + 1; //攜伴人數加上自己
         $getid= $admin->getid();
         $num = $admin->check_id();
+        $checkk = $admin->checkid();
         if($num > 0) {
             $newcount = $getid["people"] - $admin->maxx;
-            if($newcount >= 0) {
+            if($newcount >= 0 && $checkk > 0) {
             $data= $admin->updatecount($newcount);
             $dataa= $admin->insert();
             header("location: readmodify?show_id=$admin->activityy_id");
@@ -114,6 +115,7 @@ class adminController extends Controller {
     		exit;
     	}
         }
+        
     }
     function ajaxgetconut(){
         $admin =  $this->model("activity");

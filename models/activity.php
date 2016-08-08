@@ -70,7 +70,7 @@
             $this->pdoo->closeConnection();
             return $data;
         }
-        //讀取活動ID
+        //讀取活動url
         public function getid() {
             $sql ="SELECT * FROM `activity` WHERE `url` = ?";
             $stmt = $this->con->prepare($sql);
@@ -90,6 +90,25 @@
             $data = $stmt->execute();
             $this->pdoo->closeConnection();
             return $data;
+        }
+        //判斷是否重複報名
+        public function checkid() {
+            $sql ="SELECT * FROM `activity_detail` WHERE `employee_id` = ? AND `activity_id` = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(1, $this->employee_id, PDO::PARAM_STR);
+            $stmt->bindValue(2, $this->activityy_id, PDO::PARAM_STR);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            $this->pdoo->closeConnection();
+            //return $rows;
+             if(!$row) {
+                $_SESSION['alert'] = "報名成功";
+                return true; 
+            }else{
+                $_SESSION['alert'] = "重複報名";
+                return false;
+               
+            }
         }
         //判斷有沒有此員工編號
         public function check_id() {
@@ -111,22 +130,44 @@
         }
         //修改剩餘人數
         public function updatecount($newcount){
-        //$sql = "SELECT `people` FROM `activity` WHERE `url`= ? FOR UPDATE ";
-        //sleep(5);
-        $sql = "UPDATE `activity` SET `people`= ? WHERE `url`= ?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bindValue(1, $newcount, PDO::PARAM_STR);
-        $stmt->bindValue(2, $this->activityy_id, PDO::PARAM_STR);
-         $stmt->execute();
-        $result = $stmt->fetchAll();
-	    $this->pdoo->closeConnection();
-	    if($result) {
-	        $_SESSION['alert'] = "報名成功";
-	        return true;
+        
+        try{
+            $this->con->beginTransaction();
+            
+            $sql = "SELECT `people` FROM `activity` WHERE `url`= ? FOR UPDATE ";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(1, $this->activityy_id, PDO::PARAM_STR);
+            $stmt->execute();
+        
+            $result = $stmt->fetch();
+             //sleep(5); 
+            if($result['people'] >= $admin->maxx ){
+                $sql = "UPDATE `activity` SET `people`= ? WHERE `url`= ?";
+                $stmt = $this->con->prepare($sql);
+                
+                $stmt->bindValue(1, $newcount, PDO::PARAM_STR);
+                $stmt->bindValue(2, $this->activityy_id, PDO::PARAM_STR);
+                
+                $result = $stmt->execute();
+            }
+    	    $this->pdoo->closeConnection();
+    	    
+    	    $this->con->commit();
+    	    
+    	    if($result) {
+    	        $_SESSION['alert'] = "報名成功";
+    	        return true;
+	        }else{
+	            throw new Exception("你出錯了!");
 	        }
-        } 
+	        
+        }catch (Exception $error) {
+            $this->con->rollBack();
+            echo $error->getMessage();
+        }
+        }
         public function message(){
-        $_SESSION['alert'] = "此次報名人數超過報名餘額";
+        $_SESSION['alert'] = "報名人數超過或重複報名";
         }
         public function error(){
         $_SESSION['alert'] = "時間還沒開始報名";
