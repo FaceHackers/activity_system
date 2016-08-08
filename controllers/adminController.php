@@ -101,9 +101,9 @@ class adminController extends Controller {
         $getid= $admin->getid();
         $num = $admin->check_id();
         $checkk = $admin->checkid();
-        if($num > 0) {
+        
             $newcount = $getid["people"] - $admin->maxx;
-            if($newcount >= 0 && $checkk > 0) {
+            if($newcount >= 0 && $checkk > 0 && $num > 0) {
             $data= $admin->updatecount($newcount);
             $dataa= $admin->insert();
             header("location: readmodify?show_id=$admin->activityy_id");
@@ -114,7 +114,7 @@ class adminController extends Controller {
     		header("location: readmodify?show_id=$admin->activityy_id");
     		exit;
     	}
-        }
+        
         
     }
     function ajaxgetconut(){
